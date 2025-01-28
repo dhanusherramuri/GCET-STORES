@@ -22,12 +22,19 @@ import axios from 'axios';
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+<<<<<<< HEAD
   const [role, setRole] = useState('SELECT A ROLE');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   
 
+=======
+  const [role, setRole] = useState('pa');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+>>>>>>> 2d05b94 (Inital Commit.)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -44,6 +51,7 @@ const LoginPage = () => {
         localStorage.setItem('uname', username);
         localStorage.setItem('token', 'demo-token');
       localStorage.setItem('userRole', role);
+<<<<<<< HEAD
       // console.log(localStorage.getItem('uname'));
       // console.log(localStorage.getItem('userRole'));
       // console.log(localStorage.getItem('token'));
@@ -59,6 +67,13 @@ const LoginPage = () => {
           'ds': 'Data Science',
           'cs': 'Cyber Security'
       } as const;
+=======
+      console.log(localStorage.getItem('uname'));
+      console.log(localStorage.getItem('userRole'));
+      console.log(localStorage.getItem('token'));
+        // navigate('/products');
+
+>>>>>>> 2d05b94 (Inital Commit.)
         if (username && password) {
           // For demo purposes, we're using local storage
           localStorage.setItem('token', 'demo-token');
@@ -72,6 +87,7 @@ const LoginPage = () => {
             navigate('/admin/consumables')
           } 
           else if (role === 'pa') {
+<<<<<<< HEAD
             const dept =username.split('.');
             localStorage.setItem('Department', departmentMapping[dept[1] as keyof typeof departmentMapping]);
             console.log(localStorage.getItem('Department'));
@@ -80,6 +96,10 @@ const LoginPage = () => {
           else if(role === 'security'){
             navigate('/gate-entry');
           }
+=======
+            navigate('/student/consumables');
+          }
+>>>>>>> 2d05b94 (Inital Commit.)
           else{
             navigate('/');
           }
@@ -160,8 +180,11 @@ return (
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-indigo-500"
               required
             >
+<<<<<<< HEAD
               <option value="SELECT A ROLE" hidden>SELECT A ROLE</option>
               <option value="security">Security</option>
+=======
+>>>>>>> 2d05b94 (Inital Commit.)
               <option value="pa">PA</option>
               <option value="faculty">Faculty</option>
               <option value="hod">HOD</option>

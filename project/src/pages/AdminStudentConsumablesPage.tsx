@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import  { useState, useEffect } from 'react';
 import { LogOut, Search,  Download } from 'lucide-react';
+=======
+import React, { useState, useEffect } from 'react';
+import { LogOut, Search, Calendar, Download } from 'lucide-react';
+>>>>>>> 2d05b94 (Inital Commit.)
 import { useNavigate } from 'react-router-dom';
 
 interface PurchaseOrder {
@@ -137,7 +142,11 @@ const AdminStudentConsumablesPage = () => {
     <div className="min-h-screen bg-gray-100">
       <nav className="bg-indigo-600 text-white p-4">
         <div className="container mx-auto flex justify-between items-center">
+<<<<<<< HEAD
           <h1 className="text-xl font-bold">MIR Purchases</h1>
+=======
+          <h1 className="text-xl font-bold">Consumable Purchases</h1>
+>>>>>>> 2d05b94 (Inital Commit.)
           <div className="flex items-center space-x-4">
             <button
               onClick={() => navigate('/admin/consumables')}

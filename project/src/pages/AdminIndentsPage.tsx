@@ -201,6 +201,7 @@
 
 // export default AdminIndentsPage; 
 
+<<<<<<< HEAD
 // import React, { useState, useEffect } from 'react';
 // import { LogOut, Filter, Clock, Check, MessageSquare } from 'lucide-react';
 // import { useNavigate } from 'react-router-dom';
@@ -518,6 +519,8 @@
 
 // export default AdminIndentsPage;
 
+=======
+>>>>>>> 2d05b94 (Inital Commit.)
 import React, { useState, useEffect } from 'react';
 import { LogOut, Filter, Clock, Check, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -538,7 +541,11 @@ interface PurchaseIndent {
   }[];
   // remarks: string;
   status: 'pending' | 'accepted' | 'rejected';
+<<<<<<< HEAD
   deliveryStatus: 'not_delivered' | 'delivered' | 'out_for_delivery';
+=======
+  deliveryStatus: 'not_delivered' | 'delivered';
+>>>>>>> 2d05b94 (Inital Commit.)
   deliveryRemarks: {
     remark: string;
     date: string;
@@ -590,7 +597,11 @@ const AdminIndentsPage = () => {
     navigate('/login');
   };
 
+<<<<<<< HEAD
   const handleDeliveryStatusChange = async (indentId: string, newStatus: 'not_delivered' | 'delivered' | 'out_for_delivery') => {
+=======
+  const handleDeliveryStatusChange = async (indentId: string, newStatus: 'not_delivered' | 'delivered') => {
+>>>>>>> 2d05b94 (Inital Commit.)
     try {
       const response = await fetch('http://localhost:3001/indents/update-delivery', {
         method: 'POST',
@@ -664,12 +675,15 @@ const AdminIndentsPage = () => {
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-xl font-bold">Admin Indents Management</h1>
           <div className="flex items-center space-x-4">
+<<<<<<< HEAD
           <button
               onClick={() => navigate('/admin/inventory')}
               className="hover:text-indigo-200"
             >
               View Inventory
             </button>
+=======
+>>>>>>> 2d05b94 (Inital Commit.)
             <button
               onClick={() => navigate('/admin/consumables')}
               className="hover:text-indigo-200"
@@ -677,6 +691,7 @@ const AdminIndentsPage = () => {
               Manage Consumables
             </button>
             <button
+<<<<<<< HEAD
               onClick={() => navigate('/admin/student-consumables')}
               className="hover:text-indigo-200"
             >
@@ -689,6 +704,8 @@ const AdminIndentsPage = () => {
               View History
             </button>
             <button
+=======
+>>>>>>> 2d05b94 (Inital Commit.)
               onClick={handleLogout}
               className="flex items-center space-x-2 hover:text-indigo-200"
             >
@@ -787,6 +804,7 @@ const AdminIndentsPage = () => {
                     <td className="px-4 py-2">
                       <select
                         value={indent.deliveryStatus}
+<<<<<<< HEAD
                         onChange={(e) => handleDeliveryStatusChange(indent._id, e.target.value as 'not_delivered' | 'out_for_delivery')}
                         disabled={indent.deliveryStatus === 'delivered'}
                         className={`px-2 py-1 rounded-lg border ${
@@ -802,6 +820,18 @@ const AdminIndentsPage = () => {
                         {indent.deliveryStatus === 'delivered' && (
                           <option value="delivered">Delivered</option>
                         )}
+=======
+                        onChange={(e) => handleDeliveryStatusChange(indent._id, e.target.value as 'not_delivered' | 'delivered')}
+                        disabled={indent.deliveryStatus === 'delivered'||indent.status === 'rejected'}
+                        className={`px-2 py-1 rounded-lg border ${
+                          indent.deliveryStatus === 'delivered' 
+                            ? 'bg-green-100 text-green-800 border-green-200' 
+                            : 'bg-yellow-100 text-yellow-800 border-yellow-200'
+                        }`}
+                      >
+                        <option value="not_delivered">Not Delivered</option>
+                        <option value="delivered">Delivered</option>
+>>>>>>> 2d05b94 (Inital Commit.)
                       </select>
                     </td>
                     <td className="px-4 py-2">

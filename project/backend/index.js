@@ -758,19 +758,27 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const UserModel = require('./models/User');
+<<<<<<< HEAD
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+=======
+>>>>>>> 2d05b94 (Inital Commit.)
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
+<<<<<<< HEAD
 mongoose.connect("Connection String")
+=======
+mongoose.connect("mongodb+srv://EDRK:EDRK@cluster0.iuymw.mongodb.net/Users")
+>>>>>>> 2d05b94 (Inital Commit.)
     .then(() => console.log("Database connected successfully"))
     .catch(err => {
         console.log("Database connection error:", err);
         process.exit(1);
     });
+<<<<<<< HEAD
     // function generateRandomToken(length) {
     //     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     //     let token = '';
@@ -809,6 +817,9 @@ mongoose.connect("Connection String")
     //         res.json({ status: "Error" });
     //     }
     // });
+=======
+
+>>>>>>> 2d05b94 (Inital Commit.)
 // Login route
 app.post('/login', async(req,res) => {
     const {username,password,role} = req.body;
@@ -819,9 +830,12 @@ app.post('/login', async(req,res) => {
         if(user) {
             if(user.Pwd === password && user.Role === role) {
                 console.log("SUCCESS")
+<<<<<<< HEAD
                 // const SECRET_KEY = generateRandomToken(32);
                 //     const token = jwt.sign({ username: user.Un, role: user.Role }, SECRET_KEY, { expiresIn: '1h' });
                 //     res.json({ status: "Success", token });
+=======
+>>>>>>> 2d05b94 (Inital Commit.)
                 res.json("Success");
             } else {
                 console.log("Invalid Credentials")
@@ -856,10 +870,13 @@ const ConsumableItemSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true
+<<<<<<< HEAD
     },
     category: {
         type: String,
         required: true
+=======
+>>>>>>> 2d05b94 (Inital Commit.)
     }
 }, {
     timestamps: true
@@ -1019,6 +1036,7 @@ const PurchaseIndentSchema = new mongoose.Schema({
 
 const PurchaseIndent = mongoose.model('PurchaseIndent', PurchaseIndentSchema);
 
+<<<<<<< HEAD
 // History Schema
 const HistorySchema = new mongoose.Schema({
     date: {
@@ -1162,6 +1180,24 @@ app.get('/history', async (req, res) => {
     } catch (error) {
         console.error('Error fetching history:', error);
         res.status(500).json({ message: "Error fetching history", error: error.message });
+=======
+// Create new consumable items
+app.post('/consumables', async (req, res) => {
+    const { items } = req.body;
+
+    try {
+        const savedItems = await ConsumableItem.insertMany(items);
+        res.status(201).json({ 
+            message: 'Items added successfully', 
+            data: savedItems 
+        });
+    } catch (error) {
+        console.error('Error adding items:', error);
+        res.status(400).json({ 
+            error: 'Failed to add items',
+            message: error.message
+        });
+>>>>>>> 2d05b94 (Inital Commit.)
     }
 });
 
@@ -1176,6 +1212,7 @@ app.get('/consumables', async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
 app.post('/consumables', async (req, res) => {
     const { items } = req.body;
 
@@ -1297,6 +1334,8 @@ app.post('/consumables/update', async (req, res) => {
 });
 
 
+=======
+>>>>>>> 2d05b94 (Inital Commit.)
 // Create purchase order
 app.post('/purchase', async (req, res) => {
     const { items, studentId } = req.body;
@@ -1557,6 +1596,7 @@ app.post('/indents/update-delivery', async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
 
 //GATE ENTRY//
 
@@ -1691,6 +1731,8 @@ const gateEntrySchema = new mongoose.Schema({
 //     }
 //   });
 
+=======
+>>>>>>> 2d05b94 (Inital Commit.)
 // const transporter = nodemailer.createTransport({
 //     service: 'gmail',
 //     auth: {
@@ -1817,4 +1859,8 @@ const gateEntrySchema = new mongoose.Schema({
 
 app.listen(3001, () => {
     console.log("Server running on port 3001");
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 2d05b94 (Inital Commit.)

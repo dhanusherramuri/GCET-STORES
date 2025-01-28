@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 // import React, { useState, useEffect } from 'react';
@@ -233,6 +234,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { LogOut, Plus, Save, Search } from 'lucide-react';
+=======
+import React, { useState } from 'react';
+import { LogOut, Plus, Save } from 'lucide-react';
+>>>>>>> 2d05b94 (Inital Commit.)
 import { useNavigate } from 'react-router-dom';
 
 interface ConsumableItem {
@@ -240,7 +245,10 @@ interface ConsumableItem {
   quantity: number;
   price: number;
   description: string;
+<<<<<<< HEAD
   category: string;
+=======
+>>>>>>> 2d05b94 (Inital Commit.)
 }
 
 const AdminConsumablePage = () => {
@@ -249,6 +257,7 @@ const AdminConsumablePage = () => {
     itemName: '',
     quantity: 0,
     price: 0,
+<<<<<<< HEAD
     description: '',
     category: 'electronics'
   }]);
@@ -270,6 +279,10 @@ const AdminConsumablePage = () => {
       console.error('Error fetching existing items:', error);
     }
   };
+=======
+    description: ''
+  }]);
+>>>>>>> 2d05b94 (Inital Commit.)
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -281,8 +294,12 @@ const AdminConsumablePage = () => {
       itemName: '',
       quantity: 0,
       price: 0,
+<<<<<<< HEAD
       description: '',
       category: 'electronics'
+=======
+      description: ''
+>>>>>>> 2d05b94 (Inital Commit.)
     }]);
   };
 
@@ -293,6 +310,7 @@ const AdminConsumablePage = () => {
       [field]: value
     };
     setItems(newItems);
+<<<<<<< HEAD
 
     // Update suggestions when itemName changes
     if (field === 'itemName' && typeof value === 'string') {
@@ -316,10 +334,13 @@ const AdminConsumablePage = () => {
     };
     setItems(newItems);
     setSuggestions([]);
+=======
+>>>>>>> 2d05b94 (Inital Commit.)
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+<<<<<<< HEAD
     
     try {
       // Check for existing items and prepare data
@@ -333,20 +354,32 @@ const AdminConsumablePage = () => {
         };
       });
 
+=======
+    try {
+>>>>>>> 2d05b94 (Inital Commit.)
       const response = await fetch('http://localhost:3001/consumables', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+<<<<<<< HEAD
         body: JSON.stringify({ items: itemsToUpdate }),
       });
 
       if (response.ok) {
         alert('Items processed successfully!');
+=======
+        body: JSON.stringify({ items }),
+      });
+
+      if (response.ok) {
+        alert('Items added successfully!');
+>>>>>>> 2d05b94 (Inital Commit.)
         setItems([{
           itemName: '',
           quantity: 0,
           price: 0,
+<<<<<<< HEAD
           description: '',
           category: 'electronics'
         }]);
@@ -357,6 +390,16 @@ const AdminConsumablePage = () => {
     } catch (error) {
       console.error('Error processing items:', error);
       alert('Failed to process items');
+=======
+          description: ''
+        }]);
+      } else {
+        throw new Error('Failed to add items');
+      }
+    } catch (error) {
+      console.error('Error adding items:', error);
+      alert('Failed to add items');
+>>>>>>> 2d05b94 (Inital Commit.)
     }
   };
 
@@ -364,6 +407,7 @@ const AdminConsumablePage = () => {
     <div className="min-h-screen bg-gray-100">
       <nav className="bg-indigo-600 text-white p-4">
         <div className="container mx-auto flex justify-between items-center">
+<<<<<<< HEAD
           <h1 className="text-xl font-bold">Admin Stock Management</h1>
           <div className="flex items-center space-x-4">
             <button
@@ -373,6 +417,11 @@ const AdminConsumablePage = () => {
               View Inventory
             </button>
             <button
+=======
+          <h1 className="text-xl font-bold">Admin Consumables Management</h1>
+          <div className="flex items-center space-x-4">
+            <button
+>>>>>>> 2d05b94 (Inital Commit.)
               onClick={() => navigate('/admin/indents')}
               className="hover:text-indigo-200"
             >
@@ -382,6 +431,7 @@ const AdminConsumablePage = () => {
               onClick={() => navigate('/admin/student-consumables')}
               className="hover:text-indigo-200"
             >
+<<<<<<< HEAD
               View MIR's
             </button>
             <button
@@ -395,6 +445,9 @@ const AdminConsumablePage = () => {
               className="hover:text-indigo-200"
             >
               Gate History
+=======
+              Student Purchases
+>>>>>>> 2d05b94 (Inital Commit.)
             </button>
             <button
               onClick={handleLogout}
@@ -416,7 +469,10 @@ const AdminConsumablePage = () => {
                 <thead>
                   <tr className="bg-gray-50">
                     <th className="px-4 py-2">Item Name</th>
+<<<<<<< HEAD
                     <th className="px-4 py-2">Category</th>
+=======
+>>>>>>> 2d05b94 (Inital Commit.)
                     <th className="px-4 py-2">Quantity</th>
                     <th className="px-4 py-2">Price (₹)</th>
                     <th className="px-4 py-2">Description</th>
@@ -426,6 +482,7 @@ const AdminConsumablePage = () => {
                   {items.map((item, index) => (
                     <tr key={index} className="border-t">
                       <td className="px-4 py-2">
+<<<<<<< HEAD
                         <div className="relative">
                           <input
                             type="text"
@@ -468,6 +525,15 @@ const AdminConsumablePage = () => {
                           <option value="lab equipment">Lab Equipment</option>
                           <option value="tools">Tools</option>
                         </select>
+=======
+                        <input
+                          type="text"
+                          value={item.itemName}
+                          onChange={(e) => updateItem(index, 'itemName', e.target.value)}
+                          className="w-full px-2 py-1 border rounded"
+                          required
+                        />
+>>>>>>> 2d05b94 (Inital Commit.)
                       </td>
                       <td className="px-4 py-2">
                         <input

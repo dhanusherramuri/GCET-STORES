@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@sendgrid/mail": "^7.7.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.344.0",
@@ -17,6 +18,14 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.22.3"
+=======
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.22.3",
+    "lucide-react": "^0.344.0",
+    "nodemailer": "^6.9.9",
+    "@sendgrid/mail": "^7.7.0"
+>>>>>>> 2d05b94 (Inital Commit.)
   },
   "devDependencies": {
     "@types/react": "^18.3.5",
@@ -28,4 +37,8 @@
     "typescript": "^5.5.3",
     "vite": "^5.4.2"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 2d05b94 (Inital Commit.)
