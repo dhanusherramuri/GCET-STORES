@@ -1,5 +1,3 @@
-# GCET-STORES
-This is an in-house project for Geethanjali College of Engineering and Technology which serves as a major project for me and this has been built using MERN stack and this maintains a realtime tracking of the inventory and management of capital and non-capital items and even giving an option to download the reports so as to maintain the reports.
 # GCET-Stores - Geethanjali College of Engineering and Technology
 Overview
 This Stores Management System is an in-house project developed for Geethanjali College of Engineering and Technology to streamline the management of inventory, capital, and non-capital items in the college stores. Built using the MERN stack (MongoDB, Express.js, React.js, Node.js), the system provides real-time tracking, efficient management, and report generation capabilities to ensure smooth operations.
