@@ -218,6 +218,118 @@
 
 // export default App;
 
+// import React from 'react';
+// import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+// import LoginPage from './pages/LoginPage';
+// import PurchaseIndentPage from './pages/PurchaseIndentPage';
+// import AcceptorPage from './pages/AcceptorPage';
+// import AdminConsumablePage from './pages/AdminConsumablePage';
+// import AdminIndentsPage from './pages/AdminIndentsPage';
+// import AdminStudentConsumablesPage from './pages/AdminStudentConsumablesPage';
+// import StudentConsumablePage from './pages/StudentConsumablePage';
+// import AdminInventoryPage from './pages/AdminInventoryPage';
+
+// const PrivateRoute = ({ children, allowedRoles }: { children: React.ReactNode, allowedRoles: string[] }) => {
+//   const isAuthenticated = !!localStorage.getItem('token');
+//   const userRole = localStorage.getItem('userRole');
+  
+//   if (!isAuthenticated || !userRole || !allowedRoles.includes(userRole)) {
+//     return <Navigate to="/login" />;
+//   }
+
+//   return <>{children}</>;
+// };
+
+// function App() {
+//   const userRole = localStorage.getItem('userRole');
+
+//   const getRedirectPath = (role: string | null) => {
+//     switch (role) {
+//       case 'faculty':
+//         return '/purchase-indent';
+//       case 'hod':
+//         return '/acceptor';
+//         case 'principal':
+//           return '/acceptor';
+//         case 'secretary':
+//           return '/acceptor';
+//       case 'admin':
+//         return '/admin/consumables';
+//       case 'student':
+//         return '/student/consumables';
+//       default:
+//         return '/login';
+//     }
+//   };
+
+//   return (
+//     <Router>
+//       <Routes>
+//         <Route path="/login" element={<LoginPage />} />
+//         <Route
+//           path="/student/consumables"
+//           element={
+//             <PrivateRoute allowedRoles={['pa']}>
+//               <StudentConsumablePage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/purchase-indent"
+//           element={
+//             <PrivateRoute allowedRoles={['faculty']}>
+//               <PurchaseIndentPage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/acceptor"
+//           element={
+//             <PrivateRoute allowedRoles={['hod','principal','secretary']}>
+//               <AcceptorPage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/admin/consumables"
+//           element={
+//             <PrivateRoute allowedRoles={['admin']}>
+//               <AdminConsumablePage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/admin/indents"
+//           element={
+//             <PrivateRoute allowedRoles={['admin']}>
+//               <AdminIndentsPage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/admin/student-consumables"
+//           element={
+//             <PrivateRoute allowedRoles={['admin']}>
+//               <AdminStudentConsumablesPage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/admin/inventory"
+//           element={
+//             <PrivateRoute allowedRoles={['admin']}>
+//               <AdminInventoryPage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route path="/" element={<Navigate to={getRedirectPath(userRole)} />} />
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
@@ -225,8 +337,11 @@ import PurchaseIndentPage from './pages/PurchaseIndentPage';
 import AcceptorPage from './pages/AcceptorPage';
 import AdminConsumablePage from './pages/AdminConsumablePage';
 import AdminIndentsPage from './pages/AdminIndentsPage';
+import AdminInventoryPage from './pages/AdminInventoryPage';
 import AdminStudentConsumablesPage from './pages/AdminStudentConsumablesPage';
 import StudentConsumablePage from './pages/StudentConsumablePage';
+import PATrackingPage from './pages/PATrackingPage';
+import AdminHistoryPage from './pages/AdminHistoryPage';
 
 const PrivateRoute = ({ children, allowedRoles }: { children: React.ReactNode, allowedRoles: string[] }) => {
   const isAuthenticated = !!localStorage.getItem('token');
@@ -246,12 +361,8 @@ function App() {
     switch (role) {
       case 'faculty':
         return '/purchase-indent';
-      case 'hod':
+      case 'acceptor':
         return '/acceptor';
-        case 'principal':
-          return '/acceptor';
-        case 'secretary':
-          return '/acceptor';
       case 'admin':
         return '/admin/consumables';
       case 'student':
@@ -306,10 +417,34 @@ function App() {
           }
         />
         <Route
+          path="/admin/inventory"
+          element={
+            <PrivateRoute allowedRoles={['admin']}>
+              <AdminInventoryPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/admin/student-consumables"
           element={
             <PrivateRoute allowedRoles={['admin']}>
               <AdminStudentConsumablesPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/history"
+          element={
+            <PrivateRoute allowedRoles={['admin']}>
+              <AdminHistoryPage/>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/pa/tracking"
+          element={
+            <PrivateRoute allowedRoles={['pa']}>
+              <PATrackingPage />
             </PrivateRoute>
           }
         />

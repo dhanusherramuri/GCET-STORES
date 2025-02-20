@@ -26,6 +26,8 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -42,11 +44,21 @@ const LoginPage = () => {
         localStorage.setItem('uname', username);
         localStorage.setItem('token', 'demo-token');
       localStorage.setItem('userRole', role);
-      console.log(localStorage.getItem('uname'));
-      console.log(localStorage.getItem('userRole'));
-      console.log(localStorage.getItem('token'));
+      // console.log(localStorage.getItem('uname'));
+      // console.log(localStorage.getItem('userRole'));
+      // console.log(localStorage.getItem('token'));
         // navigate('/products');
-
+        const departmentMapping = {
+          'cse': 'Computer Science Engineering',
+          'ece': 'Electronics Engineering',
+          'mech': 'Mechanical Engineering',
+          'civil': 'Civil Engineering',
+          'eee': 'Electrical Engineering',
+          'ai': 'Artificial Intelligence',
+          'ml': 'Machine Learning',
+          'ds': 'Data Science',
+          'cs': 'Cyber Security'
+      } as const;
         if (username && password) {
           // For demo purposes, we're using local storage
           localStorage.setItem('token', 'demo-token');
@@ -60,6 +72,9 @@ const LoginPage = () => {
             navigate('/admin/consumables')
           } 
           else if (role === 'pa') {
+            const dept =username.split('.');
+            localStorage.setItem('Department', departmentMapping[dept[1] as keyof typeof departmentMapping]);
+            console.log(localStorage.getItem('Department'));
             navigate('/student/consumables');
           }
           else{
