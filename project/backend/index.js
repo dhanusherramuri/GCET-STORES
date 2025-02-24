@@ -1557,6 +1557,140 @@ app.post('/indents/update-delivery', async (req, res) => {
     }
 });
 
+
+//GATE ENTRY//
+
+const gateEntrySchema = new mongoose.Schema({
+    entryId: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    date: {
+      type: Date,
+      default: Date.now
+    },
+    items: [{
+      serialNo: {
+        type: Number,
+        required: true
+      },
+      invoiceNumber: {
+        type: String,
+        required: true
+      },
+      supplierName: {
+        type: String,
+        required: true
+      },
+      itemName: {
+        type: String,
+        required: true
+      },
+      quantity: {
+        type: Number,
+        required: true,
+        min: 1
+      },
+      unitPrice: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+      totalPrice: {
+        type: Number,
+        required: true
+      },
+      remarks: String,
+      timestamp: {
+        type: Date,
+        default: Date.now
+      }
+    }]
+  });
+  
+  const GateEntry = mongoose.model('GateEntry', gateEntrySchema);
+  
+  // Add these routes to your existing Express routes
+  app.post('/gate-entry', async (req, res) => {
+    try {
+      const gateEntry = new GateEntry(req.body);
+      await gateEntry.save();
+      res.status(201).json(gateEntry);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  });
+  
+  app.get('/gate-entries', async (req, res) => {
+    try {
+      const entries = await GateEntry.find().sort({ date: -1 });
+      res.json(entries);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+// const gateEntrySchema = new mongoose.Schema({
+//     entryId: {
+//       type: String,
+//       required: true,
+//       unique: true
+//     },
+//     invoiceNumber: {
+//       type: String,
+//       required: true
+//     },
+//     supplierName: {
+//       type: String,
+//       required: true
+//     },
+//     itemName: {
+//       type: String,
+//       required: true
+//     },
+//     quantity: {
+//       type: Number,
+//       required: true,
+//       min: 1
+//     },
+//     price: {
+//       type: Number,
+//       required: true,
+//       min: 0
+//     },
+//     total: {
+//       type: Number,
+//       required: true,
+//       min: 0
+//     },
+//     timestamp: {
+//       type: Date,
+//       default: Date.now
+//     }
+//   });
+  
+//   const GateEntry = mongoose.model('GateEntry', gateEntrySchema);
+  
+  
+//   app.post('/gate-entry', async (req, res) => {
+//     try {
+//       const gateEntry = new GateEntry(req.body);
+//       await gateEntry.save();
+//       res.status(201).json(gateEntry);
+//     } catch (error) {
+//       res.status(400).json({ message: error.message });
+//     }
+//   });
+  
+//   app.get('/gate-entries', async (req, res) => {
+//     try {
+//       const entries = await GateEntry.find().sort({ timestamp: -1 });
+//       res.json(entries);
+//     } catch (error) {
+//       res.status(500).json({ message: error.message });
+//     }
+//   });
+
 // const transporter = nodemailer.createTransport({
 //     service: 'gmail',
 //     auth: {

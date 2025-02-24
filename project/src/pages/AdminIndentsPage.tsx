@@ -664,11 +664,29 @@ const AdminIndentsPage = () => {
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-xl font-bold">Admin Indents Management</h1>
           <div className="flex items-center space-x-4">
+          <button
+              onClick={() => navigate('/admin/inventory')}
+              className="hover:text-indigo-200"
+            >
+              View Inventory
+            </button>
             <button
               onClick={() => navigate('/admin/consumables')}
               className="hover:text-indigo-200"
             >
               Manage Consumables
+            </button>
+            <button
+              onClick={() => navigate('/admin/student-consumables')}
+              className="hover:text-indigo-200"
+            >
+              View MIR's
+            </button>
+            <button
+              onClick={() => navigate('/admin/history')}
+              className="hover:text-indigo-200"
+            >
+              View History
             </button>
             <button
               onClick={handleLogout}

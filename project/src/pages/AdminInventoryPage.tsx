@@ -131,6 +131,18 @@ const AdminInventoryPage = () => {
               View Indents
             </button>
             <button
+              onClick={() => navigate('/admin/student-consumables')}
+              className="hover:text-indigo-200"
+            >
+              View MIR's
+            </button>
+            <button
+              onClick={() => navigate('/admin/history')}
+              className="hover:text-indigo-200"
+            >
+              View History
+            </button>
+            <button
               onClick={handleLogout}
               className="flex items-center space-x-2 hover:text-indigo-200"
             >

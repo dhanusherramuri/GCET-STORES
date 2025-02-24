@@ -342,6 +342,8 @@ import AdminStudentConsumablesPage from './pages/AdminStudentConsumablesPage';
 import StudentConsumablePage from './pages/StudentConsumablePage';
 import PATrackingPage from './pages/PATrackingPage';
 import AdminHistoryPage from './pages/AdminHistoryPage';
+import GateEntryPage from './pages/GateEntryPage';
+import GateHistory from './pages/GateHistory';
 
 const PrivateRoute = ({ children, allowedRoles }: { children: React.ReactNode, allowedRoles: string[] }) => {
   const isAuthenticated = !!localStorage.getItem('token');
@@ -367,6 +369,8 @@ function App() {
         return '/admin/consumables';
       case 'student':
         return '/student/consumables';
+      case 'security' :
+        return '/gate-entry';
       default:
         return '/login';
     }
@@ -437,6 +441,22 @@ function App() {
           element={
             <PrivateRoute allowedRoles={['admin']}>
               <AdminHistoryPage/>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/gate-entry"
+          element={
+            <PrivateRoute allowedRoles={['security']}>
+              <GateEntryPage/>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/GateHistory"
+          element={
+            <PrivateRoute allowedRoles={['admin']}>
+              <GateHistory />
             </PrivateRoute>
           }
         />
