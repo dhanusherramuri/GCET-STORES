@@ -765,7 +765,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect("mongodb+srv://EDRK:EDRK@cluster0.iuymw.mongodb.net/Users")
+mongoose.connect("Connection String")
     .then(() => console.log("Database connected successfully"))
     .catch(err => {
         console.log("Database connection error:", err);
