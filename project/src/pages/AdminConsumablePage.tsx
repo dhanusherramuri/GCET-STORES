@@ -391,6 +391,12 @@ const AdminConsumablePage = () => {
               View History
             </button>
             <button
+              onClick={() => navigate('/GateHistory')}
+              className="hover:text-indigo-200"
+            >
+              Gate History
+            </button>
+            <button
               onClick={handleLogout}
               className="flex items-center space-x-2 hover:text-indigo-200"
             >

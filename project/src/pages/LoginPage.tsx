@@ -22,7 +22,7 @@ import axios from 'axios';
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('pa');
+  const [role, setRole] = useState('SELECT A ROLE');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -76,6 +76,9 @@ const LoginPage = () => {
             localStorage.setItem('Department', departmentMapping[dept[1] as keyof typeof departmentMapping]);
             console.log(localStorage.getItem('Department'));
             navigate('/student/consumables');
+          }
+          else if(role === 'security'){
+            navigate('/gate-entry');
           }
           else{
             navigate('/');
@@ -157,6 +160,8 @@ return (
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-indigo-500"
               required
             >
+              <option value="SELECT A ROLE" hidden>SELECT A ROLE</option>
+              <option value="security">Security</option>
               <option value="pa">PA</option>
               <option value="faculty">Faculty</option>
               <option value="hod">HOD</option>
