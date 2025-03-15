@@ -492,6 +492,7 @@ import GateHistory from './pages/GateHistory';
 import MaterialIssuePage from './pages/MaterialIssuePage';
 import DepartmentIssuePage from './pages/DepartmentIssuePage';
 import MaterialIssueHistoryPage from './pages/MaterialIssueHistoryPage';
+import AdminDashboardPage from './pages/AdminDashboardPage';
 
 const PrivateRoute = ({ children, allowedRoles }: { children: React.ReactNode, allowedRoles: string[] }) => {
   const isAuthenticated = !!localStorage.getItem('token');
@@ -631,6 +632,14 @@ function App() {
           element={
             <PrivateRoute allowedRoles={['admin']}>
               <MaterialIssueHistoryPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <PrivateRoute allowedRoles={['admin']}>
+              <AdminDashboardPage />
             </PrivateRoute>
           }
         />
