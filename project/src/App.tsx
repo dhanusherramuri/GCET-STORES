@@ -218,7 +218,6 @@
 
 // export default App;
 
-<<<<<<< HEAD
 // import React from 'react';
 // import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 // import LoginPage from './pages/LoginPage';
@@ -331,16 +330,158 @@
 
 // export default App;
 
-=======
->>>>>>> 2d05b94 (Inital Commit.)
+// import React from 'react';
+// import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+// import LoginPage from './pages/LoginPage';
+// import PurchaseIndentPage from './pages/PurchaseIndentPage';
+// import AcceptorPage from './pages/AcceptorPage';
+// import AdminConsumablePage from './pages/AdminConsumablePage';
+// import AdminIndentsPage from './pages/AdminIndentsPage';
+// import AdminInventoryPage from './pages/AdminInventoryPage';
+// import AdminStudentConsumablesPage from './pages/AdminStudentConsumablesPage';
+// import StudentConsumablePage from './pages/StudentConsumablePage';
+// import PATrackingPage from './pages/PATrackingPage';
+// import AdminHistoryPage from './pages/AdminHistoryPage';
+// import GateEntryPage from './pages/GateEntryPage';
+// import GateHistory from './pages/GateHistory';
+
+// const PrivateRoute = ({ children, allowedRoles }: { children: React.ReactNode, allowedRoles: string[] }) => {
+//   const isAuthenticated = !!localStorage.getItem('token');
+//   const userRole = localStorage.getItem('userRole');
+  
+//   if (!isAuthenticated || !userRole || !allowedRoles.includes(userRole)) {
+//     return <Navigate to="/login" />;
+//   }
+
+//   return <>{children}</>;
+// };
+
+// function App() {
+//   const userRole = localStorage.getItem('userRole');
+
+//   const getRedirectPath = (role: string | null) => {
+//     switch (role) {
+//       case 'faculty':
+//         return '/purchase-indent';
+//       case 'acceptor':
+//         return '/acceptor';
+//       case 'admin':
+//         return '/admin/consumables';
+//       case 'student':
+//         return '/student/consumables';
+//       case 'security' :
+//         return '/gate-entry';
+//       default:
+//         return '/login';
+//     }
+//   };
+
+//   return (
+//     <Router>
+//       <Routes>
+//         <Route path="/login" element={<LoginPage />} />
+//         <Route
+//           path="/student/consumables"
+//           element={
+//             <PrivateRoute allowedRoles={['pa']}>
+//               <StudentConsumablePage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/purchase-indent"
+//           element={
+//             <PrivateRoute allowedRoles={['faculty']}>
+//               <PurchaseIndentPage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/acceptor"
+//           element={
+//             <PrivateRoute allowedRoles={['hod','principal','secretary']}>
+//               <AcceptorPage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/admin/consumables"
+//           element={
+//             <PrivateRoute allowedRoles={['admin']}>
+//               <AdminConsumablePage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/admin/indents"
+//           element={
+//             <PrivateRoute allowedRoles={['admin']}>
+//               <AdminIndentsPage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/admin/inventory"
+//           element={
+//             <PrivateRoute allowedRoles={['admin']}>
+//               <AdminInventoryPage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/admin/student-consumables"
+//           element={
+//             <PrivateRoute allowedRoles={['admin']}>
+//               <AdminStudentConsumablesPage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/admin/history"
+//           element={
+//             <PrivateRoute allowedRoles={['admin']}>
+//               <AdminHistoryPage/>
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/gate-entry"
+//           element={
+//             <PrivateRoute allowedRoles={['security']}>
+//               <GateEntryPage/>
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/GateHistory"
+//           element={
+//             <PrivateRoute allowedRoles={['admin']}>
+//               <GateHistory />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route
+//           path="/pa/tracking"
+//           element={
+//             <PrivateRoute allowedRoles={['pa']}>
+//               <PATrackingPage />
+//             </PrivateRoute>
+//           }
+//         />
+//         <Route path="/" element={<Navigate to={getRedirectPath(userRole)} />} />
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import PurchaseIndentPage from './pages/PurchaseIndentPage';
 import AcceptorPage from './pages/AcceptorPage';
-import AdminConsumablePage from './pages/AdminConsumablePage';
 import AdminIndentsPage from './pages/AdminIndentsPage';
-<<<<<<< HEAD
 import AdminInventoryPage from './pages/AdminInventoryPage';
 import AdminStudentConsumablesPage from './pages/AdminStudentConsumablesPage';
 import StudentConsumablePage from './pages/StudentConsumablePage';
@@ -348,10 +489,9 @@ import PATrackingPage from './pages/PATrackingPage';
 import AdminHistoryPage from './pages/AdminHistoryPage';
 import GateEntryPage from './pages/GateEntryPage';
 import GateHistory from './pages/GateHistory';
-=======
-import AdminStudentConsumablesPage from './pages/AdminStudentConsumablesPage';
-import StudentConsumablePage from './pages/StudentConsumablePage';
->>>>>>> 2d05b94 (Inital Commit.)
+import MaterialIssuePage from './pages/MaterialIssuePage';
+import DepartmentIssuePage from './pages/DepartmentIssuePage';
+import MaterialIssueHistoryPage from './pages/MaterialIssueHistoryPage';
 
 const PrivateRoute = ({ children, allowedRoles }: { children: React.ReactNode, allowedRoles: string[] }) => {
   const isAuthenticated = !!localStorage.getItem('token');
@@ -371,26 +511,16 @@ function App() {
     switch (role) {
       case 'faculty':
         return '/purchase-indent';
-<<<<<<< HEAD
       case 'acceptor':
         return '/acceptor';
-=======
-      case 'hod':
-        return '/acceptor';
-        case 'principal':
-          return '/acceptor';
-        case 'secretary':
-          return '/acceptor';
->>>>>>> 2d05b94 (Inital Commit.)
       case 'admin':
-        return '/admin/consumables';
+        return '/admin/dashboard';
       case 'student':
         return '/student/consumables';
-<<<<<<< HEAD
-      case 'security' :
+      case 'security':
         return '/gate-entry';
-=======
->>>>>>> 2d05b94 (Inital Commit.)
+      case 'pa':
+        return '/pa/tracking';
       default:
         return '/login';
     }
@@ -425,14 +555,6 @@ function App() {
           }
         />
         <Route
-          path="/admin/consumables"
-          element={
-            <PrivateRoute allowedRoles={['admin']}>
-              <AdminConsumablePage />
-            </PrivateRoute>
-          }
-        />
-        <Route
           path="/admin/indents"
           element={
             <PrivateRoute allowedRoles={['admin']}>
@@ -441,7 +563,6 @@ function App() {
           }
         />
         <Route
-<<<<<<< HEAD
           path="/admin/inventory"
           element={
             <PrivateRoute allowedRoles={['admin']}>
@@ -450,8 +571,6 @@ function App() {
           }
         />
         <Route
-=======
->>>>>>> 2d05b94 (Inital Commit.)
           path="/admin/student-consumables"
           element={
             <PrivateRoute allowedRoles={['admin']}>
@@ -459,7 +578,6 @@ function App() {
             </PrivateRoute>
           }
         />
-<<<<<<< HEAD
         <Route
           path="/admin/history"
           element={
@@ -492,8 +610,30 @@ function App() {
             </PrivateRoute>
           }
         />
-=======
->>>>>>> 2d05b94 (Inital Commit.)
+        <Route
+          path="/admin/material-issue"
+          element={
+            <PrivateRoute allowedRoles={['admin']}>
+              <MaterialIssuePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/department-issue"
+          element={
+            <PrivateRoute allowedRoles={['pa']}>
+              <DepartmentIssuePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/material-issue-history"
+          element={
+            <PrivateRoute allowedRoles={['admin']}>
+              <MaterialIssueHistoryPage />
+            </PrivateRoute>
+          }
+        />
         <Route path="/" element={<Navigate to={getRedirectPath(userRole)} />} />
       </Routes>
     </Router>

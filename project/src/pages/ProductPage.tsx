@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import React from 'react';
 // import { Package, LogOut } from 'lucide-react';
 // import { useNavigate } from 'react-router-dom';
@@ -92,8 +91,6 @@
 
 // export default ProductPage;
 
-=======
->>>>>>> 2d05b94 (Inital Commit.)
 import React from 'react';
 import { Package, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -108,10 +105,7 @@ interface Product {
 
 const ProductPage = () => {
   const navigate = useNavigate();
-<<<<<<< HEAD
   const userRole = localStorage.getItem('userRole');
-=======
->>>>>>> 2d05b94 (Inital Commit.)
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -147,7 +141,6 @@ const ProductPage = () => {
       <nav className="bg-indigo-600 text-white p-4">
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-xl font-bold">College Inventory</h1>
-<<<<<<< HEAD
           <div className="flex items-center space-x-4">
             {userRole === 'pa' && (
               <button
@@ -165,15 +158,6 @@ const ProductPage = () => {
               <span>Logout</span>
             </button>
           </div>
-=======
-          <button
-            onClick={handleLogout}
-            className="flex items-center space-x-2 hover:text-indigo-200"
-          >
-            <LogOut size={20} />
-            <span>Logout</span>
-          </button>
->>>>>>> 2d05b94 (Inital Commit.)
         </div>
       </nav>
 

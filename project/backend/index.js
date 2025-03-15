@@ -758,27 +758,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const UserModel = require('./models/User');
-<<<<<<< HEAD
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-=======
->>>>>>> 2d05b94 (Inital Commit.)
+// const MaterialIssue = require('./models/materialIssue');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-<<<<<<< HEAD
-mongoose.connect("Connection String")
-=======
-mongoose.connect("mongodb+srv://EDRK:EDRK@cluster0.iuymw.mongodb.net/Users")
->>>>>>> 2d05b94 (Inital Commit.)
+mongoose.connect("mongodb+srv://CLUSTER DETAILS")
     .then(() => console.log("Database connected successfully"))
     .catch(err => {
         console.log("Database connection error:", err);
         process.exit(1);
     });
-<<<<<<< HEAD
     // function generateRandomToken(length) {
     //     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     //     let token = '';
@@ -817,9 +810,6 @@ mongoose.connect("mongodb+srv://EDRK:EDRK@cluster0.iuymw.mongodb.net/Users")
     //         res.json({ status: "Error" });
     //     }
     // });
-=======
-
->>>>>>> 2d05b94 (Inital Commit.)
 // Login route
 app.post('/login', async(req,res) => {
     const {username,password,role} = req.body;
@@ -830,12 +820,9 @@ app.post('/login', async(req,res) => {
         if(user) {
             if(user.Pwd === password && user.Role === role) {
                 console.log("SUCCESS")
-<<<<<<< HEAD
                 // const SECRET_KEY = generateRandomToken(32);
                 //     const token = jwt.sign({ username: user.Un, role: user.Role }, SECRET_KEY, { expiresIn: '1h' });
                 //     res.json({ status: "Success", token });
-=======
->>>>>>> 2d05b94 (Inital Commit.)
                 res.json("Success");
             } else {
                 console.log("Invalid Credentials")
@@ -870,13 +857,10 @@ const ConsumableItemSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true
-<<<<<<< HEAD
     },
     category: {
         type: String,
         required: true
-=======
->>>>>>> 2d05b94 (Inital Commit.)
     }
 }, {
     timestamps: true
@@ -1036,7 +1020,6 @@ const PurchaseIndentSchema = new mongoose.Schema({
 
 const PurchaseIndent = mongoose.model('PurchaseIndent', PurchaseIndentSchema);
 
-<<<<<<< HEAD
 // History Schema
 const HistorySchema = new mongoose.Schema({
     date: {
@@ -1180,24 +1163,6 @@ app.get('/history', async (req, res) => {
     } catch (error) {
         console.error('Error fetching history:', error);
         res.status(500).json({ message: "Error fetching history", error: error.message });
-=======
-// Create new consumable items
-app.post('/consumables', async (req, res) => {
-    const { items } = req.body;
-
-    try {
-        const savedItems = await ConsumableItem.insertMany(items);
-        res.status(201).json({ 
-            message: 'Items added successfully', 
-            data: savedItems 
-        });
-    } catch (error) {
-        console.error('Error adding items:', error);
-        res.status(400).json({ 
-            error: 'Failed to add items',
-            message: error.message
-        });
->>>>>>> 2d05b94 (Inital Commit.)
     }
 });
 
@@ -1212,7 +1177,6 @@ app.get('/consumables', async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
 app.post('/consumables', async (req, res) => {
     const { items } = req.body;
 
@@ -1333,9 +1297,56 @@ app.post('/consumables/update', async (req, res) => {
     }
 });
 
+app.delete('/consumables/delete', async (req, res) => {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+  
+    try {
+      const { itemIds } = req.body;
+  
+      if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+        return res.status(400).json({ error: 'Valid item IDs array is required' });
+      }
+  
+      const deletedItems = await ConsumableItem.deleteMany(
+        { _id: { $in: itemIds } },
+        { session }
+      );
+  
+      if (deletedItems.deletedCount === 0) {
+        await session.abortTransaction();
+        return res.status(404).json({ error: 'No items found to delete' });
+      }
+  
+      const historyEntries = itemIds.map(itemId => ({
+        itemName: "Item Deleted",
+        category: "Inventory Management",
+        department: "Inventory",
+        type: "consumable",
+        quantity: 0,
+        price: 0,
+        totalAmount: 0,
+        details: `Item ID: ${itemId} deleted from inventory`
+      }));
+  
+      await History.insertMany(historyEntries, { session });
+      await session.commitTransaction();
+  
+      res.status(200).json({ 
+        message: `Successfully deleted ${deletedItems.deletedCount} items`,
+        deletedCount: deletedItems.deletedCount
+      });
+    } catch (error) {
+      await session.abortTransaction();
+      console.error('Error deleting items:', error);
+      res.status(500).json({ message: 'Error deleting items', error: error.message });
+    } finally {
+      session.endSession();
+    }
+  });
 
-=======
->>>>>>> 2d05b94 (Inital Commit.)
+
+
 // Create purchase order
 app.post('/purchase', async (req, res) => {
     const { items, studentId } = req.body;
@@ -1596,7 +1607,6 @@ app.post('/indents/update-delivery', async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
 
 //GATE ENTRY//
 
@@ -1731,8 +1741,6 @@ const gateEntrySchema = new mongoose.Schema({
 //     }
 //   });
 
-=======
->>>>>>> 2d05b94 (Inital Commit.)
 // const transporter = nodemailer.createTransport({
 //     service: 'gmail',
 //     auth: {
@@ -1857,10 +1865,735 @@ const gateEntrySchema = new mongoose.Schema({
 //     }
 //   });
 
+// Material Issue API
+// app.post('/material-issue', async (req, res) => {
+//     try {
+//       const { issueId, itemId, issuedQty, requiredQty, department, issuerName, date } = req.body;
+      
+//       // Check if item exists and has enough stock
+//       const itemIndex = consumableItems.findIndex(item => item._id === itemId);
+//       if (itemIndex === -1) {
+//         return res.status(404).json({ message: 'Item not found' });
+//       }
+      
+//       if (consumableItems[itemIndex].quantity < issuedQty) {
+//         return res.status(400).json({ 
+//           message: 'Not enough stock',
+//           availableQuantity: consumableItems[itemIndex].quantity
+//         });
+//       }
+      
+//       // Create material issue record
+//       const materialIssue = new MaterialIssue({
+//         issueId,
+//         itemId,
+//         itemName: consumableItems[itemIndex].itemName,
+//         requiredQty,
+//         issuedQty,
+//         remainingQty: requiredQty - issuedQty,
+//         department,
+//         issuerName,
+//         date,
+//         status: 'pending'
+//       });
+      
+//       // Reduce inventory
+//       consumableItems[itemIndex].quantity -= issuedQty;
+      
+//       // Create history record
+//       const historyRecord = new History({
+//         itemName: consumableItems[itemIndex].itemName,
+//         category: consumableItems[itemIndex].category,
+//         department,
+//         type: 'consumable',
+//         quantity: issuedQty,
+//         price: consumableItems[itemIndex].price,
+//         totalAmount: issuedQty * consumableItems[itemIndex].price
+//       });
+      
+//       await Promise.all([
+//         materialIssue.save(),
+//         historyRecord.save()
+//       ]);
+      
+//       res.status(201).json({ 
+//         message: 'Material issued successfully',
+//         materialIssue
+//       });
+//     } catch (error) {
+//       console.error('Error issuing material:', error);
+//       res.status(500).json({ message: 'Error issuing material', error: error.message });
+//     }
+//   });
+  
+//   // Get all material issues
+//   app.get('/material-issues', async (req, res) => {
+//     try {
+//       const issues = await MaterialIssue.find().sort({ date: -1 });
+//       res.json(issues);
+//     } catch (error) {
+//       console.error('Error fetching material issues:', error);
+//       res.status(500).json({ message: 'Error fetching material issues', error: error.message });
+//     }
+//   });
+  
+//   // Get material issues for a specific department
+//   app.get('/material-issues/:department', async (req, res) => {
+//     try {
+//       const { department } = req.params;
+//       const issues = await MaterialIssue.find({ department }).sort({ date: -1 });
+//       res.json(issues);
+//     } catch (error) {
+//       console.error('Error fetching department material issues:', error);
+//       res.status(500).json({ message: 'Error fetching department material issues', error: error.message });
+//     }
+//   });
+  
+//   // Department issue API
+//   app.post('/department-issue', async (req, res) => {
+//     try {
+//       const { issueId, department } = req.body;
+      
+//       const issue = await MaterialIssue.findById(issueId);
+//       if (!issue) {
+//         return res.status(404).json({ message: 'Issue not found' });
+//       }
+      
+//       if (issue.status === 'issued') {
+//         return res.status(400).json({ message: 'Issue already processed' });
+//       }
+      
+//       issue.status = 'issued';
+//       issue.departmentIssueDate = new Date();
+      
+//       // Create history record for department issue
+//       const historyRecord = new History({
+//         itemName: issue.itemName,
+//         category: 'Department Issue',
+//         department: department,
+//         type: 'consumable',
+//         quantity: issue.issuedQty,
+//         price: 0, // Price is not relevant for department issues
+//         totalAmount: 0 // Total amount is not relevant for department issues
+//       });
+      
+//       await Promise.all([
+//         issue.save(),
+//         historyRecord.save()
+//       ]);
+      
+//       res.json({ 
+//         message: 'Department issue processed successfully',
+//         issue
+//       });
+//     } catch (error) {
+//       console.error('Error processing department issue:', error);
+//       res.status(500).json({ message: 'Error processing department issue', error: error.message });
+//     }
+//   });
+  
+//   // Get material issue history
+//   app.get('/material-issue-history', async (req, res) => {
+//     try {
+//       // Get all material issues
+//       const issues = await MaterialIssue.find().sort({ date: -1 });
+      
+//       // Get history records related to material issues
+//       const history = await History.find({
+//         $or: [
+//           { category: 'Department Issue' },
+//           { type: 'consumable', department: { $ne: 'Inventory' } }
+//         ]
+//       }).sort({ date: -1 });
+      
+//       res.json({
+//         issues,
+//         history
+//       });
+//     } catch (error) {
+//       console.error('Error fetching material issue history:', error);
+//       res.status(500).json({ message: 'Error fetching material issue history', error: error.message });
+//     }
+//   });
+
+
+// Material Issue Schema
+// const MaterialIssueSchema = new mongoose.Schema({
+//     issueId: {
+//         type: String,
+//         required: true,
+//         unique: true
+//     },
+//     itemId: {
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref: 'ConsumableItem',
+//         required: true
+//     },
+//     itemName: {
+//         type: String,
+//         required: true
+//     },
+//     requiredQty: {
+//         type: Number,
+//         required: true,
+//         min: 1
+//     },
+//     issuedQty: {
+//         type: Number,
+//         required: true,
+//         min: 0
+//     },
+//     remainingQty: {
+//         type: Number,
+//         required: true
+//     },
+//     department: {
+//         type: String,
+//         required: true
+//     },
+//     issuerName: {
+//         type: String,
+//         required: true
+//     },
+//     date: {
+//         type: Date,
+//         default: Date.now
+//     },
+//     status: {
+//         type: String,
+//         enum: ['pending', 'issued', 'rejected'],
+//         default: 'pending'
+//     },
+//     departmentIssueDate: {
+//         type: Date
+//     }
+// });
+
+// const MaterialIssue = mongoose.model('MaterialIssue', MaterialIssueSchema);
+
+// // Material Issue API Routes
+// app.post('/material-issue', async (req, res) => {
+//     const session = await mongoose.startSession();
+//     session.startTransaction();
+
+//     try {
+//         const { issueId, itemId, issuedQty, requiredQty, department, issuerName, date } = req.body;
+        
+//         // Find the consumable item
+//         const consumableItem = await ConsumableItem.findById(itemId).session(session);
+        
+//         if (!consumableItem) {
+//             throw new Error('Item not found');
+//         }
+        
+//         // Check if there's enough stock
+//         if (consumableItem.quantity < issuedQty) {
+//             throw new Error('Not enough stock');
+//         }
+        
+//         // Reduce inventory
+//         await ConsumableItem.findByIdAndUpdate(
+//             itemId,
+//             { $inc: { quantity: -issuedQty } },
+//             { session }
+//         );
+        
+//         // Create material issue record
+//         const materialIssue = new MaterialIssue({
+//             issueId,
+//             itemId,
+//             itemName: consumableItem.itemName,
+//             requiredQty,
+//             issuedQty,
+//             remainingQty: requiredQty - issuedQty,
+//             department,
+//             issuerName,
+//             date: date || new Date(),
+//             status: 'pending'
+//         });
+        
+//         // Create history record
+//         const historyEntry = new History({
+//             itemName: consumableItem.itemName,
+//             category: consumableItem.category,
+//             department,
+//             type: 'consumable',
+//             quantity: issuedQty,
+//             price: consumableItem.price,
+//             totalAmount: issuedQty * consumableItem.price
+//         });
+        
+//         // Save material issue and history
+//         await materialIssue.save({ session });
+//         await historyEntry.save({ session });
+        
+//         // Commit transaction
+//         await session.commitTransaction();
+        
+//         res.status(201).json({ 
+//             message: 'Material issued successfully',
+//             materialIssue
+//         });
+//     } catch (error) {
+//         // Abort transaction in case of error
+//         await session.abortTransaction();
+        
+//         console.error('Error issuing material:', error);
+//         res.status(500).json({ 
+//             message: 'Error issuing material', 
+//             error: error.message 
+//         });
+//     } finally {
+//         // End the session
+//         session.endSession();
+//     }
+// });
+
+// // Get all material issues
+app.get('/material-issues', async (req, res) => {
+    try {
+        const issues = await MaterialIssue.find()
+            .populate('itemId', 'itemName category') // Populate item details
+            .sort({ date: -1 });
+        res.json(issues);
+    } catch (error) {
+        console.error('Error fetching material issues:', error);
+        res.status(500).json({ 
+            message: 'Error fetching material issues', 
+            error: error.message 
+        });
+    }
+});
+
+// // Get material issues for a specific department
+app.get('/material-issues/:department', async (req, res) => {
+    try {
+        const { department } = req.params;
+        const issues = await MaterialIssue.find({ department })
+            .populate('itemId', 'itemName category')
+            .sort({ date: -1 });
+        res.json(issues);
+    } catch (error) {
+        console.error('Error fetching department material issues:', error);
+        res.status(500).json({ 
+            message: 'Error fetching department material issues', 
+            error: error.message 
+        });
+    }
+});
+
+
+// // Process department issue
+// app.post('/department-issue', async (req, res) => {
+//     const session = await mongoose.startSession();
+//     session.startTransaction();
+
+//     try {
+//         const { issueId, department } = req.body;
+        
+//         const issue = await MaterialIssue.findById(issueId).session(session);
+        
+//         if (!issue) {
+//             throw new Error('Issue not found');
+//         }
+        
+//         if (issue.status === 'issued') {
+//             throw new Error('Issue already processed');
+//         }
+        
+//         // Update issue status
+//         issue.status = 'issued';
+//         issue.departmentIssueDate = new Date();
+        
+//         // Create history record for department issue
+//         const historyEntry = new History({
+//             itemName: issue.itemName,
+//             category: 'Department Issue',
+//             department: department,
+//             type: 'consumable',
+//             quantity: issue.issuedQty,
+//             price: 0,
+//             totalAmount: 0
+//         });
+        
+//         // Save updates
+//         await issue.save({ session });
+//         await historyEntry.save({ session });
+        
+//         // Commit transaction
+//         await session.commitTransaction();
+        
+//         res.json({ 
+//             message: 'Department issue processed successfully',
+//             issue
+//         });
+//     } catch (error) {
+//         // Abort transaction in case of error
+//         await session.abortTransaction();
+        
+//         console.error('Error processing department issue:', error);
+//         res.status(500).json({ 
+//             message: 'Error processing department issue', 
+//             error: error.message 
+//         });
+//     } finally {
+//         // End the session
+//         session.endSession();
+//     }
+// });
+app.post('/distribute-material', async (req, res) => {
+    try {
+      const { issueId, subDepartment, facultyName, issuedQty } = req.body;
+      
+      const issue = await MaterialIssue.findOne({ issueId });
+      if (!issue) {
+        return res.status(404).json({ message: 'Issue not found' });
+      }
+      
+      if (issue.remainingQty < issuedQty) {
+        return res.status(400).json({ 
+          message: 'Not enough quantity available',
+          availableQuantity: issue.remainingQty
+        });
+      }
+  
+      if (!issue.issueDetails) {
+        issue.issueDetails = [];
+      }
+  
+      issue.issueDetails.push({
+        subDepartment,
+        facultyName,
+        issuedQty,
+        issueDate: new Date()
+      });
+  
+      issue.remainingQty -= issuedQty;
+  
+      if (issue.remainingQty === 0) {
+        issue.status = 'fully distributed';
+      } else if (issue.remainingQty < issue.requiredQty) {
+        issue.status = 'partially distributed';
+      }
+  
+      const historyRecord = new History({
+        itemName: issue.itemName,
+        category: 'Department Distribution',
+        department: subDepartment,
+        type: 'consumable',
+        quantity: issuedQty,
+        price: 0,
+        totalAmount: 0,
+        details: `Distributed to ${facultyName}`
+      });
+  
+      await Promise.all([
+        issue.save(),
+        historyRecord.save()
+      ]);
+  
+      res.json({
+        message: 'Material distributed successfully',
+        issue
+      });
+    } catch (error) {
+      console.error('Error distributing material:', error);
+      res.status(500).json({ 
+        message: 'Error distributing material', 
+        error: error.message 
+      });
+    }
+  });
+  
+
+// // Get material issue history
+app.get('/material-issue-history', async (req, res) => {
+    try {
+        // Get all material issues
+        const issues = await MaterialIssue.find()
+            .populate('itemId', 'itemName category')
+            .sort({ date: -1 });
+        
+        // Get history records related to material issues
+        const history = await History.find({
+            $or: [
+                { category: 'Department Issue' },
+                { type: 'consumable', department: { $ne: 'Inventory' } }
+            ]
+        }).sort({ date: -1 });
+        
+        res.json({
+            issues,
+            history
+        });
+    } catch (error) {
+        console.error('Error fetching material issue history:', error);
+        res.status(500).json({ 
+            message: 'Error fetching material issue history', 
+            error: error.message 
+        });
+    }
+});
+
+// const MaterialIssue = mongoose.model('MaterialIssue', MaterialIssueSchema);
+
+// Material Issue API Routes
+const MaterialIssueSchema = new mongoose.Schema({
+    issueId: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    itemId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ConsumableItem',
+        required: true
+    },
+    itemName: {
+        type: String,
+        required: true
+    },
+    department: {
+        type: String,
+        required: true
+    },
+    parentIssueId: {
+        type: String,
+        default: null
+    },
+    requiredQty: {
+        type: Number,
+        required: true,
+        min: 1
+    },
+    issuedQty: {
+        type: Number,
+        required: true,
+        min: 0
+    },
+    remainingQty: {
+        type: Number,
+        required: true
+    },
+    issueDetails: [{
+        subDepartment: {
+            type: String,
+            required: true
+        },
+        facultyName: {
+            type: String,
+            required: true
+        },
+        issuedQty: {
+            type: Number,
+            required: true,
+            min: 0
+        },
+        issueDate: {
+            type: Date,
+            default: Date.now
+        }
+    }],
+    issuerName: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    },
+    status: {
+        type: String,
+        enum: ['pending', 'issued', 'partially distributed', 'fully distributed'],
+        default: 'pending'
+    }
+});
+
+const MaterialIssue = mongoose.model('MaterialIssue', MaterialIssueSchema);
+
+// Route to issue material to a department
+app.post('/material-issue', async (req, res) => {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
+    try {
+        const { 
+            issueId, 
+            itemId, 
+            department,
+            issuedQty, 
+            requiredQty, 
+            issuerName
+        } = req.body;
+        
+        // Find the consumable item
+        const consumableItem = await ConsumableItem.findById(itemId).session(session);
+        
+        if (!consumableItem) {
+            throw new Error('Item not found');
+        }
+        
+        // Check if there's enough stock
+        if (consumableItem.quantity < issuedQty) {
+            throw new Error('Not enough stock');
+        }
+        
+        // Reduce inventory
+        await ConsumableItem.findByIdAndUpdate(
+            itemId,
+            { $inc: { quantity: -issuedQty } },
+            { session }
+        );
+        
+        // Create material issue record
+        const materialIssue = new MaterialIssue({
+            issueId,
+            itemId,
+            itemName: consumableItem.itemName,
+            department,
+            requiredQty,
+            issuedQty,
+            remainingQty: issuedQty,
+            issuerName,
+            date: new Date(),
+            status: 'issued'
+        });
+        
+        // Create history record
+        const historyEntry = new History({
+            itemName: consumableItem.itemName,
+            category: consumableItem.category,
+            department: department,
+            type: 'consumable',
+            quantity: issuedQty,
+            price: consumableItem.price,
+            totalAmount: issuedQty * consumableItem.price
+        });
+        
+        // Save material issue and history
+        await materialIssue.save({ session });
+        await historyEntry.save({ session });
+        
+        // Commit transaction
+        await session.commitTransaction();
+        
+        res.status(201).json({ 
+            message: 'Material issued to department successfully',
+            materialIssue
+        });
+    } catch (error) {
+        // Abort transaction in case of error
+        await session.abortTransaction();
+        
+        console.error('Error issuing material:', error);
+        res.status(500).json({ 
+            message: 'Error issuing material', 
+            error: error.message 
+        });
+    } finally {
+        // End the session
+        session.endSession();
+    }
+});
+
+// // Route to distribute material within a department
+// app.post('/distribute-material', async (req, res) => {
+//     const session = await mongoose.startSession();
+//     session.startTransaction();
+
+//     try {
+//         const { 
+//             issueId, 
+//             subDepartment,
+//             facultyName,
+//             issuedQty 
+//         } = req.body;
+        
+//         // Find the original material issue
+//         const materialIssue = await MaterialIssue.findOne({ issueId }).session(session);
+        
+//         if (!materialIssue) {
+//             throw new Error('Material issue not found');
+//         }
+        
+//         // Check if there's enough remaining quantity
+//         if (materialIssue.remainingQty < issuedQty) {
+//             throw new Error('Not enough remaining quantity');
+//         }
+        
+//         // Update the material issue
+//         materialIssue.remainingQty -= issuedQty;
+        
+//         // Add distribution details
+//         materialIssue.issueDetails.push({
+//             subDepartment,
+//             facultyName,
+//             issuedQty,
+//             issueDate: new Date()
+//         });
+        
+//         // Update status based on remaining quantity
+//         if (materialIssue.remainingQty === 0) {
+//             materialIssue.status = 'fully distributed';
+//         } else {
+//             materialIssue.status = 'partially distributed';
+//         }
+        
+//         // Create history record for distribution
+//         const historyEntry = new History({
+//             itemName: materialIssue.itemName,
+//             category: 'Intradepartment Distribution',
+//             department: materialIssue.department,
+//             subDepartment: subDepartment,
+//             type: 'consumable',
+//             quantity: issuedQty,
+//             facultyName: facultyName
+//         });
+        
+//         // Save updated material issue and history
+//         await materialIssue.save({ session });
+//         await historyEntry.save({ session });
+        
+//         // Commit transaction
+//         await session.commitTransaction();
+        
+//         res.status(201).json({ 
+//             message: 'Material distributed within department successfully',
+//             materialIssue
+//         });
+//     } catch (error) {
+//         // Abort transaction in case of error
+//         await session.abortTransaction();
+        
+//         console.error('Error distributing material:', error);
+//         res.status(500).json({ 
+//             message: 'Error distributing material', 
+//             error: error.message 
+//         });
+//     } finally {
+//         // End the session
+//         session.endSession();
+//     }
+// });
+
+// // Get material issues for a specific department
+// app.get('/material-issues/:department', async (req, res) => {
+//     try {
+//         const { department } = req.params;
+//         const issues = await MaterialIssue.find({ department })
+//             .populate('itemId', 'itemName category')
+//             .sort({ date: -1 });
+        
+//         res.json(issues);
+//     } catch (error) {
+//         console.error('Error fetching department material issues:', error);
+//         res.status(500).json({ 
+//             message: 'Error fetching department material issues', 
+//             error: error.message 
+//         });
+//     }
+// });
+
 app.listen(3001, () => {
     console.log("Server running on port 3001");
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 2d05b94 (Inital Commit.)
