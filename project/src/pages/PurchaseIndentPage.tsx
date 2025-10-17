@@ -78,45 +78,7 @@ const PurchaseIndentPage = () => {
     setItems(newItems);
   };
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   const result = await axios.post('http://localhost:3001/pip',{
-  //     itemDescription,
-  //     quantity,
-  //     unitPrice,
-  //     totalPrice,
-  //     remarks
-  //   })
-  //   // Here you would typically send the data to a backend
-  //   console.log({
-  //     psNo,
-  //     date: new Date().toISOString(),
-  //     department,
-  //     items
-  //   });
-  //   alert('Purchase indent submitted successfully!');
-  // };
-  
-
-  // const transporter = nodemailer.createTransport({
-  //   service: 'gmail',
-  //   auth: {
-  //     user: 'brainly291203@gmail.com', // your Gmail address
-  //     pass: 'brainly12345',   // your Gmail app password (use App Passwords for 2FA)
-  //   },
-  // });
-  
-  // (async () => {
-  //   const info = await transporter.sendMail({
-  //     from: '"EDRK" <brainly291203@gmail.com>',
-  //     to: "dhanush.erramuri.raj@gmail.com",
-  //     subject: "Indent Raised",
-  //     text: "A new Purchase indent has been raised. Take a look at it",
-  //     html: "<b>A new Purchase indent has been raised. Take a look at it</b>",
-  //   });
-  
-  //   console.log("Message sent:", info.messageId);
-  // })();
+ 
 
   
   const handleSubmit = async (e: React.FormEvent) => {
@@ -134,11 +96,12 @@ const PurchaseIndentPage = () => {
         totalPrice,
         remarks,
       })),
-      status: 'pending', // Replace with the appropriate status based on your backend implementation
+      status: 'pending', 
     };
   
     try {
-      const response = await axios.post('http://localhost:3001/pip', payload);
+      // const response = await axios.post('http://localhost:3001/pip', payload);
+      const response = await axios.post('${import.meta.env.VITE_API_URL}/pip', payload);
       console.log('Response:', response.data);
 
   
