@@ -33,7 +33,7 @@ const LoginPage = () => {
 
     try {
       // const result = await axios.post('http://localhost:3001/login', {
-      const result = await axios.post('${import.meta.env.VITE_API_URL}/login', {
+      const result = await axios.post(`${import.meta.env.VITE_API_URL}/login`, {
         username,
         password,
         role

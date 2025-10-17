@@ -43,7 +43,7 @@ const MaterialIssuePage = () => {
     try {
       setLoading(true);
       // const response = await fetch('http://localhost:3001/consumables');
-      const response = await fetch('${import.meta.env.VITE_API_URL}/consumables');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/consumables`);
       if (!response.ok) {
         throw new Error('Failed to fetch products');
       }
@@ -74,7 +74,7 @@ const MaterialIssuePage = () => {
 
     try {
       // const response = await fetch('http://localhost:3001/material-issue', {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/material-issue', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/material-issue`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

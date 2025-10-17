@@ -101,7 +101,7 @@ const PurchaseIndentPage = () => {
   
     try {
       // const response = await axios.post('http://localhost:3001/pip', payload);
-      const response = await axios.post('${import.meta.env.VITE_API_URL}/pip', payload);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/pip`, payload);
       console.log('Response:', response.data);
 
   

@@ -51,7 +51,7 @@ const AcceptorPage = () => {
       try {
         setLoading(true);
         // const response = await fetch('http://localhost:3001/indents');
-        const response = await fetch('${import.meta.env.VITE_API_URL}/indents');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/indents`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -122,7 +122,7 @@ const AcceptorPage = () => {
 
     try {
       // const response = await fetch('http://localhost:3001/indents/update-status', {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/indents/update-status', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/indents/update-status`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -140,7 +140,7 @@ const AcceptorPage = () => {
 
       // Refresh the data
       // const updatedResponse = await fetch('http://localhost:3001/indents');
-      const updatedResponse = await fetch('${import.meta.env.VITE_API_URL}/indents');
+      const updatedResponse = await fetch(`${import.meta.env.VITE_API_URL}/indents`);
       const updatedData = await updatedResponse.json();
       setIndents(updatedData);
       setSelectedIndents([]);

@@ -42,7 +42,7 @@ const PATrackingPage = () => {
     try {
       setLoading(true);
       // const response = await fetch('http://localhost:3001/indents');
-      const response = await fetch('${import.meta.env.VITE_API_URL}/indents');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/indents`);
       if (!response.ok) {
         throw new Error('Failed to fetch indents');
       }
@@ -71,7 +71,7 @@ const PATrackingPage = () => {
   const handleReceived = async (indentId: string) => {
     try {
       // const response = await fetch('http://localhost:3001/indents/update-delivery', {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/indents/update-delivery', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/indents/update-delivery`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

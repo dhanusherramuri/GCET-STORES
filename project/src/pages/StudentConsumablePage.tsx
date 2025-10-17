@@ -40,7 +40,7 @@ const StudentConsumablePage = () => {
       try {
         setLoading(true);
         // const response = await fetch('http://localhost:3001/consumables');
-        const response = await fetch('${import.meta.env.VITE_API_URL}/consumables');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/consumables`);
         if (!response.ok) {
           throw new Error('Failed to fetch items');
         }
@@ -115,7 +115,7 @@ const StudentConsumablePage = () => {
   const confirmPurchase = async () => {
     try {
       // const response = await fetch('http://localhost:3001/purchase', {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/purchase', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/purchase`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -136,7 +136,7 @@ const StudentConsumablePage = () => {
         setShowCart(false);
         setShowConfirmation(false);
         // const updatedItems = await fetch('http://localhost:3001/consumables').then(res => res.json());
-        const updatedItems = await fetch('${import.meta.env.VITE_API_URL}/consumables').then(res => res.json());
+        const updatedItems = await fetch(`${import.meta.env.VITE_API_URL}/consumables`).then(res => res.json());
         setItems(updatedItems);
       } else {
         throw new Error('Purchase failed');

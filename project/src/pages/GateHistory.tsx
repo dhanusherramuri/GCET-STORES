@@ -48,7 +48,7 @@ const GateHistory = () => {
       setError(null);
       console.log('Fetching gate entries...');
       // const response = await axios.get('http://localhost:3001/gate-entries', {
-      const response = await axios.get('${import.meta.env.VITE_API_URL}/gate-entries', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/gate-entries`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }

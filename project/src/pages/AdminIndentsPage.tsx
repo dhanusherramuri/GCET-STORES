@@ -75,7 +75,7 @@ const AdminIndentsPage = () => {
   const handleDeliveryStatusChange = async (indentId: string, newStatus: 'not_delivered' | 'delivered' | 'out_for_delivery') => {
     try {
       // const response = await fetch('http://localhost:3001/indents/update-delivery', {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/indents/update-delivery', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/indents/update-delivery`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ const AdminIndentsPage = () => {
 
     try {
       // const response = await fetch('http://localhost:3001/indents/update-delivery', {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/indents/update-delivery', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/indents/update-delivery`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

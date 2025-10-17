@@ -48,7 +48,7 @@ const MaterialIssueHistoryPage = () => {
     try {
       setLoading(true);
       // const response = await fetch('http://localhost:3001/material-issues');
-      const response = await fetch('${import.meta.env.VITE_API_URL}/material-issues');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/material-issues`);
       if (!response.ok) {
         throw new Error('Failed to fetch material issues');
       }

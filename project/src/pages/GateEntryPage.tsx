@@ -89,7 +89,7 @@ const GateEntryPage = () => {
   
     try {
       // const response = await axios.post('http://localhost:3001/gate-entry', payload);
-      const response = await axios.post('${import.meta.env.VITE_API_URL}/gate-entry', payload);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/gate-entry`, payload);
       console.log('Response:', response.data);
       alert('Gate entry recorded successfully!');
       navigate('/gate-entry');

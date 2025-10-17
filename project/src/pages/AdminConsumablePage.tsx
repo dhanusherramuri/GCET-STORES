@@ -34,7 +34,7 @@ const AdminConsumablePage = () => {
   const fetchExistingItems = async () => {
     try {
       // const response = await fetch('http://localhost:3001/consumables');
-      const response = await fetch('${import.meta.env.VITE_API_URL}/consumables');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/consumables`);
       if (response.ok) {
         const data = await response.json();
         setExistingItems(data);
@@ -105,7 +105,7 @@ const AdminConsumablePage = () => {
       });
 
       // const response = await fetch('http://localhost:3001/consumables', {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/consumables', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/consumables`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -148,7 +148,7 @@ const AdminConsumablePage = () => {
 
     try {
       // const response = await fetch('http://localhost:3001/consumables/delete', {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/consumables/delete', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/consumables/delete`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

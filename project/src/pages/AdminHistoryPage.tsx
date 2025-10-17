@@ -58,16 +58,16 @@
 //       setLoading(true);
       
 //       // Fetch regular history items (consumables)
-      const historyResponse = await fetch('http://localhost:3001/history');
-//       const historyResponse = await fetch('${import.meta.env.VITE_API_URL}/history');
+      // const historyResponse = await fetch('http://localhost:3001/history');
+//       const historyResponse = await fetch(`${import.meta.env.VITE_API_URL}/history`);
 //       if (!historyResponse.ok) {
 //         throw new Error('Failed to fetch history');
 //       }
 //       const historyData = await historyResponse.json();
       
 //       // Fetch approved indents
-      const indentsResponse = await fetch('http://localhost:3001/indents');
-//       const indentsResponse = await fetch('${import.meta.env.VITE_API_URL}/indents');
+      // const indentsResponse = await fetch('http://localhost:3001/indents');
+//       const indentsResponse = await fetch(`${import.meta.env.VITE_API_URL}/indents`);
 //       if (!indentsResponse.ok) {
 //         throw new Error('Failed to fetch indents');
 //       }
@@ -443,7 +443,7 @@ const AdminHistoryPage = () => {
       
       // Fetch regular history items (consumables)
       // const historyResponse = await fetch('http://localhost:3001/history');
-      const historyResponse = await fetch('${import.meta.env.VITE_API_URL}/history');
+      const historyResponse = await fetch(`${import.meta.env.VITE_API_URL}/history`);
       if (!historyResponse.ok) {
         throw new Error('Failed to fetch history');
       }
@@ -451,7 +451,7 @@ const AdminHistoryPage = () => {
       
       // Fetch approved indents
       // const indentsResponse = await fetch('http://localhost:3001/indents');
-      const indentsResponse = await fetch('${import.meta.env.VITE_API_URL}/indents');
+      const indentsResponse = await fetch(`${import.meta.env.VITE_API_URL}/indents`);
       if (!indentsResponse.ok) {
         throw new Error('Failed to fetch indents');
       }
