@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Plus, Save, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 // import ProductPage from './ProductPage';
 
 interface IndentItem {
@@ -95,7 +96,29 @@ const PurchaseIndentPage = () => {
   //   });
   //   alert('Purchase indent submitted successfully!');
   // };
+  
 
+  // const transporter = nodemailer.createTransport({
+  //   service: 'gmail',
+  //   auth: {
+  //     user: 'brainly291203@gmail.com', // your Gmail address
+  //     pass: 'brainly12345',   // your Gmail app password (use App Passwords for 2FA)
+  //   },
+  // });
+  
+  // (async () => {
+  //   const info = await transporter.sendMail({
+  //     from: '"EDRK" <brainly291203@gmail.com>',
+  //     to: "dhanush.erramuri.raj@gmail.com",
+  //     subject: "Indent Raised",
+  //     text: "A new Purchase indent has been raised. Take a look at it",
+  //     html: "<b>A new Purchase indent has been raised. Take a look at it</b>",
+  //   });
+  
+  //   console.log("Message sent:", info.messageId);
+  // })();
+
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
@@ -117,6 +140,9 @@ const PurchaseIndentPage = () => {
     try {
       const response = await axios.post('http://localhost:3001/pip', payload);
       console.log('Response:', response.data);
+
+  
+      // console.log('Email sent:', emailInfo.messageId);
       alert('Purchase indent submitted successfully!');
       navigate('/purchase-indent')
     } catch (error) {

@@ -160,7 +160,7 @@ return (
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-indigo-500"
               required
             >
-              <option value="SELECT A ROLE" hidden>SELECT A ROLE</option>
+              <option value="SELECT A ROLE" hidden>select A Role</option>
               <option value="security">Security</option>
               <option value="pa">PA</option>
               <option value="faculty">Faculty</option>

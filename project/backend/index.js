@@ -760,13 +760,15 @@ const cors = require('cors');
 const UserModel = require('./models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+// import nodemailer from 'nodemailer';
+const nodemailer = require("nodemailer");
 // const MaterialIssue = require('./models/materialIssue');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect("mongodb+srv://CLUSTER DETAILS")
+mongoose.connect("mongodb+srv://EDRK:EDRK@cluster0.iuymw.mongodb.net/Users")
     .then(() => console.log("Database connected successfully"))
     .catch(err => {
         console.log("Database connection error:", err);
@@ -1441,6 +1443,24 @@ app.post('/pip', async (req, res) => {
             });
         }
 
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: '21r11a0567@gcet.edu.in',
+              pass: 'cwnj qrmc zzro pweb',
+            },
+          });
+      
+          const mailOptions = await transporter.sendMail({
+            from: '"EDRK" <21r11a0567@gcet.edu.in>',
+            to: 'dhanush.erramuri.raj@gmail.com',
+            subject: 'Purchase Indent Raised',
+            html: `<h3>New Purchase Indent has been Submitted look into it</h3>'
+             <p>Department: ${department}</p>
+             <p>Date: ${new Date(date).toLocaleString()}</p>
+             <p>Items: ${items.length}</p>`,
+          });
+          await transporter.sendMail(mailOptions);
         const processedItems = items.map(item => {
             if (!item.deliveryRequired) {
                 item.deliveryRequired = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
@@ -1467,13 +1487,13 @@ app.post('/pip', async (req, res) => {
 
         const savedIndent = await newIndent.save();
         res.status(201).json({ 
-            message: 'Data inserted successfully', 
+            message: 'Indent submitted and email sent', 
             data: savedIndent 
         });
     } catch (error) {
         console.error('Error creating indent:', error);
         res.status(400).json({ 
-            error: 'Failed to insert data',
+            error: 'Failed to process indent or send email',
             message: error.message
         });
     }

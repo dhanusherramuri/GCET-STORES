@@ -481,6 +481,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LoginPage from './pages/LoginPage';
 import PurchaseIndentPage from './pages/PurchaseIndentPage';
 import AcceptorPage from './pages/AcceptorPage';
+import AdminConsumablePage from './pages/AdminConsumablePage';
 import AdminIndentsPage from './pages/AdminIndentsPage';
 import AdminInventoryPage from './pages/AdminInventoryPage';
 import AdminStudentConsumablesPage from './pages/AdminStudentConsumablesPage';
@@ -552,6 +553,14 @@ function App() {
           element={
             <PrivateRoute allowedRoles={['hod','principal','secretary']}>
               <AcceptorPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/consumables"
+          element={
+            <PrivateRoute allowedRoles={['admin']}>
+              <AdminConsumablePage />
             </PrivateRoute>
           }
         />
