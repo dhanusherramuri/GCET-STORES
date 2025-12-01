@@ -33,7 +33,7 @@ const AdminInventoryPage = () => {
       // const response = await fetch('http://localhost:3001/consumables');
       console.log("API URL:", import.meta.env.VITE_API_URL);
 
-      const response = await fetch('${import.meta.env.VITE_API_URL}/consumables');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/consumables`);
       if (!response.ok) {
         throw new Error('Failed to fetch products');
       }

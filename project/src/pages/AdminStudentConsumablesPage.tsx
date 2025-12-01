@@ -1,7 +1,7 @@
 
 
-import React, { useState, useEffect } from 'react';
-import { LogOut, Download, Search } from 'lucide-react';
+import { Download, LogOut, Search } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface PurchaseOrder {
@@ -32,7 +32,9 @@ const AdminStudentConsumablesPage = () => {
       try {
         setLoading(true);
         // const response = await fetch('http://localhost:3001/purchases');
-        const response = await fetch('${import.meta.env.VITE_API_URL}/purchases');
+        // const response = await fetch('${import.meta.env.VITE_API_URL}/purchases');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/purchases`);
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

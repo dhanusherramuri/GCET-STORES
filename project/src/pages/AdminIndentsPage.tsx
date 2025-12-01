@@ -1,7 +1,7 @@
 
 
-import React, { useState, useEffect } from 'react';
-import { LogOut, Filter, Clock, Check, MessageSquare } from 'lucide-react';
+import { Check, Filter, LogOut, MessageSquare } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface PurchaseIndent {
@@ -44,7 +44,9 @@ const AdminIndentsPage = () => {
     try {
       setLoading(true);
       // const response = await fetch('http://localhost:3001/indents');
-      const response = await fetch('${import.meta.env.VITE_API_URL}/indents');
+      // const response = await fetch('${import.meta.env.VITE_API_URL}/indents');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/indents`);
+
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
