@@ -1,7 +1,7 @@
 
 
-import React, { useState, useEffect } from 'react';
-import { Package, LogOut, Search, Plus } from 'lucide-react';
+import { LogOut, Package, Plus, Search } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface Product {
